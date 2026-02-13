@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Website</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Shadows Into Light', cursive;
+      background: linear-gradient(to bottom right, #ffd6e8, #fff0f7);
+      overflow-x: hidden;
+    }
+
+    .heading {
+      font-size: 3rem;
+      color: #d63384;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p, button, div, span {
+      font-family: 'Shadows Into Light', cursive;
+    }
+
+    button {
+      background: #ff85b3;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: white;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff5c99;
+      transform: scale(1.05);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .active {
+      display: flex;
+      animation: fade 0.5s ease-in;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .letter-box {
+      max-width: 700px;
+      background: rgba(255,255,255,0.6);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255,0,100,0.2);
+      font-size: 1.4rem;
+      line-height: 1.6;
+      min-height: 200px;
+    }
+
+    .gif-box img {
+      width: 250px;
+      border-radius: 15px;
+    }
+
+    .heart-btn {
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ff4d88;
+      margin-top: 15px;
+    }
+
+    #reasonText {
+      font-size: 1.8rem;
+      margin-top: 15px;
+    }
+
+    /* LAST PAGE TEXT - MADE SMALLER */
+    #finalText {
+      font-size: 1.3rem;   /* Reduced more */
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    /* LAST PAGE GIF - UNCHANGED */
+    .corner-gif {
+      width: 220px;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_0a0a0c4e45.mp3?filename=romantic-piano-117529.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- Page 1 -->
+<div class="page active" id="page1">
+  <h1 class="heading">Hii cutieee ♡</h1>
+  <button onclick="startMusic(); nextPage();">Click Me</button>
+</div>
+
+
+<!-- Page 2 -->
+<div class="page" id="page2">
+  <h1 class="heading">Love letter for you 💌</h1>
+  <div class="letter-box" id="letter"></div>
+  <button onclick="nextPage()">Next</button>
+</div>
+
+
+<!-- Page 3 -->
+<div class="page" id="page3">
+  <h1 class="heading">Why I Love You ❤️</h1>
+
+  <div class="gif-box">
+    <img src="https://media.tenor.com/cOjBPqUGt4MAAAAi/bear-hug.gif">
+  </div>
+
+  <button class="heart-btn" onclick="showReason()">tap here</button>
+
+  <p id="reasonText"></p>
+
+  <button onclick="nextPage()">Next</button>
+</div>
+
+
+<!-- Page 4 -->
+<div class="page" id="page4">
+
+  <img src="https://media.tenor.com/1jTcRfvGwVsAAAAj/bubu-dudu-kiss.gif" class="corner-gif">
+
+  <p id="finalText">
+
+Conclusion: Your gf really loves you, you should be nicer to her. You should consider moving to Jaipur and picking up her calls more often.
+
+Also, this is the most efforts I have everr put for a man, but you are not just any man, you MINEE. I really wish I was rich asf I would have bought you that laptop and those studs ad bracelets and a car but one day baby fs abhi k liye just mere noob coding skills se this is all I can gift.
+
+LOVE YOUUUUUUUUUUUUUUU  
+I HATE LDRRRRR  
+I WISH I COULD BURY YOU IN KISSESSS BUT FMLL
+
+  </p>
+
+</div>
+
+
+<script>
+
+let currentPage = 1;
+const music = document.getElementById("bgMusic");
+
+
+function startMusic() {
+  music.volume = 0.5;
+  music.play();
+}
+
+
+function nextPage() {
+
+  document.getElementById("page" + currentPage).classList.remove("active");
+
+  currentPage++;
+
+  document.getElementById("page" + currentPage).classList.add("active");
+
+  if (currentPage === 2) {
+    startLetter();
+  }
+}
+
+
+/* Letter typing */
+
+const letterText = `
+Hi babyy ❤️
+
+You know I love you like love love love you. You the cutest, sweetest and most adorable boy ever like how can someone not fall for you, have the most beautiful smile that could melt anyone. I just wanna see you succeed and be happy always and give you all the love I can. Ik I can be a lil kaleshi and childish and immature sometimes, just deal w it. Us meeting like that was the most unpredictable thing ever but I am so grateful for it,for you. I loveee you cutieee, see you soon 😘
+
+Happy Valentine's Day 💖
+`;
+
+let i = 0;
+const speed = 40;
+const letterBox = document.getElementById("letter");
+
+function startLetter() {
+  letterBox.innerHTML = "";
+  i = 0;
+  typeLetter();
+}
+
+function typeLetter() {
+  if (i < letterText.length) {
+    letterBox.innerHTML += letterText.charAt(i);
+    i++;
+    setTimeout(typeLetter, speed);
+  }
+}
+
+
+/* Reasons */
+
+const reasons = [
+  "You make me smile 💕",
+  "You cuteeeeeeee",
+  "You pyaaraaaa",
+  "You are my safe place",
+  "You a good person",
+  "You are my favorite person",
+  "You the bestest bf ever"
+];
+
+let r = 0;
+
+function showReason() {
+  document.getElementById("reasonText").innerText = reasons[r];
+  r = (r + 1) % reasons.length;
+}
+
+</script>
+
+</body>
+</html>
